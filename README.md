@@ -4,7 +4,11 @@ A useful tool to download files in online drives. Now supports **OneDrive** and 
 
 ## Requirements
 
-
+ - Python 3
+    - argparse
+    - requests
+ - Proxy server if necessary. We don't provide proxy service for DriveDownloader.
+ 
 ## Usage
 
 ```
@@ -12,6 +16,7 @@ A useful tool to download files in online drives. Now supports **OneDrive** and 
 ```
 
 ### Options
+
  - `URL`: target url to download from. **Apostrophes are needed when '!' can be parsed by shell.**
     - OneDrive Example: 'https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF'
     - GoogleDrive Example: 'https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_'
