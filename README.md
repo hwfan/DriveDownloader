@@ -11,9 +11,20 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
  
 ## Usage
 
+
+### Default Version
+
 ```
   python main.py URL FILENAME --proxy PROXY
 ```
+
+### Packed Version
+
+```
+  ddl URL FILENAME --proxy PROXY
+```
+
+See release for details.
 
 ### Options
 
