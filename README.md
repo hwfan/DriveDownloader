@@ -22,7 +22,7 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
 
 ```
   unzip ddl.zip
-  sudo ln -s ./ddl /usr/bin/ddl
+  mv ./ddl /usr/bin/ddl
   ddl URL FILENAME --proxy PROXY
 ```
 
