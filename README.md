@@ -21,6 +21,8 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
 ### Packed Version
 
 ```
+  unzip ddl.zip
+  ln -s ./ddl /usr/bin/ddl
   ddl URL FILENAME --proxy PROXY
 ```
 
