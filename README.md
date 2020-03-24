@@ -7,7 +7,7 @@ A useful tool to download files in online drives. Now supports **OneDrive** and 
  - Python 3
     - argparse
     - requests
- - Proxy server if necessary. We don't provide proxy service for DriveDownloader.
+ - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
 ## Usage
 
