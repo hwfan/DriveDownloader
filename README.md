@@ -27,7 +27,7 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
 
 **Why does "Size:Invalid" occur?**
 
-We recognize the size of file by using the 'Content-Length' of HTTP response. If this param is empty, the file size will return "Invalid".
+We recognize the size of file by using the "Content-Length" of HTTP response. If this param is empty, the file size will return "Invalid".
 
 **I couldn't connect to the target server through a socks5 proxy.**
 
