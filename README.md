@@ -1,6 +1,6 @@
 # DriveDownloader
 
-A useful tool to download files in online drives. Now supports **OneDrive** and **GoogleDrive**.
+A useful tool for downloading files on online drives. Now supports **OneDrive** and **GoogleDrive**.
 
 ## Requirements
 
@@ -29,6 +29,6 @@ A useful tool to download files in online drives. Now supports **OneDrive** and 
 
 We recognize the size of file by using the 'Content-Length' of HTTP response. If this param is empty, the file size will return "Invalid".
 
-**I couldn't connect to target server through a socks5 proxy.**
+**I couldn't connect to the target server through a socks5 proxy.**
 
 Try "socks5h" as the protocol prefix instead. It will forward the url to proxy server for parsing.
