@@ -5,7 +5,6 @@ import time
 import sys
 import re
 from tqdm import tqdm
-import ipdb
 
 def format_size(num_size):
     try:

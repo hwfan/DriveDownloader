@@ -1,2 +1,0 @@
-python main.py 'https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF' hello_od.txt --proxy socks5h://127.0.0.1:1080
-python main.py 'https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_' hello_gd.txt --proxy socks5h://127.0.0.1:1080

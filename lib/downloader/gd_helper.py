@@ -11,23 +11,27 @@ def gd_download(url, custom_filename, user_proxy):
     ua = UserAgent(verify_ssl=False)
 
     parsed_url = urlparse.urlparse(url)
-    id_str = urlparse.parse_qs(parsed_url.query)['id'][0]
+    parsed_qs = urlparse.parse_qs(parsed_url.query)
+    if 'id' in parsed_qs:
+      id_str = parsed_qs['id'][0]
+    else:
+      id_str = parsed_url.path.split('/')[3]
     URL = "https://drive.google.com/uc?export=download"
-    headers={'Accept-Encoding': '', 'User-Agent':ua.random, 'Host': 'drive.google.com'}
+    headers={'Accept-Encoding': '', 'User-Agent':ua.random}
     session = requests.Session()
     if user_proxy is not None:
-      response = session.get(URL, params = { 'id' : id_str }, stream = True, proxies={'http':user_proxy,'https':user_proxy}, headers=headers)
+      response = session.get(URL, params = { 'id' : id_str }, stream = True, proxies={'https':user_proxy}, headers=headers)
     else:
       response = session.get(URL, params = { 'id' : id_str }, stream = True, headers=headers)
-    # ipdb.set_trace()
     token = get_confirm_token(response)
-    print('confirm token:%s' % token)
+    print('confirm token: %s' % token)
     if token:
-        params = { 'id' : id_str, 'confirm' : token, 'export': 'download'}
+        params = { 'id' : id_str, 'confirm' : token }
         if user_proxy is not None:
-          response = session.get(URL, params = params, stream = True, proxies={'http':user_proxy,'https':user_proxy},headers=headers)
+          response = session.get(URL, params = params, proxies={'https':user_proxy}, stream = True, headers=headers)
         else:
           response = session.get(URL, params = params, stream = True, headers=headers)
+    
     filename_parsed, filesize = parse_response_header(response)
     filename = filename_parsed if len(custom_filename) == 0 else custom_filename
     save_response_content(response, filename, filesize)    

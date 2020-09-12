@@ -4,10 +4,13 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
 
 ## Requirements
 
- - Python 3
+  - Python 3
     - argparse
     - requests
- - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
+    - tqdm
+    - fake-useragent
+  - Use `pip install -r requirements.txt` to install the packages.
+  - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
 ## Usage
 
@@ -15,7 +18,7 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
 ### Default Version
 
 ```
-  python main.py URL FILENAME --proxy PROXY
+  python main.py URL --filename FILENAME --proxy PROXY
 ```
 
 ### Packed Version
@@ -24,7 +27,7 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
   unzip ddl.zip
   sudo chmod +x ddl
   sudo mv ./ddl /usr/bin/ddl
-  ddl URL FILENAME --proxy PROXY
+  ddl URL --filename FILENAME --proxy PROXY
 ```
 
 See release for details.
@@ -33,16 +36,18 @@ See release for details.
 
  - `URL`: target url to download from. **Apostrophes are needed when '!' can be parsed by shell.**
     - OneDrive Example: '<https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF>'
-    - GoogleDrive Example: '<https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_>'
- - `FILENAME`: output filename. Example: 'hello.txt'
+    - GoogleDrive Example: 
+      - '<https://drive.google.com/file/d/1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_/view?usp=sharing>'
+      - '<https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_>'
+ - `--filename FILENAME`: (optional) output filename. Example: 'hello.txt'
  - `--proxy PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
 
 ## FAQ
 
 **Why does "Size:Invalid" occur?**
 
-We recognize the size of file by using the "Content-Length" of HTTP response. If this param is empty, the file size will return "Invalid".
+We extract the size of file by using the "Content-Length" of HTTP response. If this parameter is empty, the file size will fall back to "Invalid". (The response of GoogleDrive often hides this header.)
 
 **I couldn't connect to the target server through a socks5 proxy.**
 
-Try "socks5h" as the protocol prefix instead. It will forward the url to proxy server for parsing.
+Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy server for parsing.
