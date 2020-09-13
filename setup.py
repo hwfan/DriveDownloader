@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name = "DriveDownloader",
-    version = "1.1.2",
+    version = "1.1.2-b0",
     keywords = ("pip", "ddl", "drivedownloader", "hwfan"),
     description = "Net Drive Downloader with python",
     long_description = "A useful tool for downloading files on net drives.",

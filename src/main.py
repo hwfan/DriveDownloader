@@ -1,6 +1,6 @@
 # Author: Hongwei Fan(@hwfan)
 # Date: Dec 25, 2019
-# Last Update: Mar 23, 2020
+# Last Update: Sep 13, 2020
 from lib.downloader.gd_helper import gd_download
 from lib.downloader.od_helper import od_download
 import argparse
