@@ -15,18 +15,15 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
 ## Usage
 
 
-### Default Version
+### Source Version
 
 ```
   python main.py URL --filename FILENAME --proxy PROXY
 ```
 
 ### Packed Version
-
 ```
-  unzip ddl.zip
-  sudo chmod +x ddl
-  sudo mv ./ddl /usr/bin/ddl
+  pip install DriveDownloader -i https://pypi.org/simple
   ddl URL --filename FILENAME --proxy PROXY
 ```
 
