@@ -15,9 +15,13 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
 ## Installation
+  1. Install from pip
   ```
     pip install DriveDownloader
-    or
+  ```
+
+  2. Install from source code
+  ```
     python setup.py install
   ```
 
