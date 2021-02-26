@@ -11,6 +11,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
     - requests
     - tqdm
     - fake-useragent
+    - pysocks
   - Use `pip install -r requirements.txt` to install the packages.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
@@ -78,7 +79,7 @@ We extract the size of file from the "Content-Length" of HTTP response. If this 
 
 Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy server for parsing.
 
-**fake_useragent.errors.FakeUserAgentError: Maximum amount of retries reached
+**fake_useragent.errors.FakeUserAgentError: Maximum amount of retries reached**
 
 This message may occur when DriveDownloader is first used. Try again and if this also occurs, please report in the issue.
 
