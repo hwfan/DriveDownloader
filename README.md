@@ -14,19 +14,33 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
   - Use `pip install -r requirements.txt` to install the packages.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
+## Installation
+  ```
+    pip install DriveDownloader
+  ```
+
 ## Usage
 
-### Start from source code
+### Interactive Mode
 
-```
-  python downloader.py URL --filename FILENAME --proxy PROXY
-```
+  ```
+    1. Simply input "ddl" in the shell and press enter.
+    2. The shell will return an interface for inputting the user info.
+      ============ Drive Downloader V1.2 ============
+      URL: (input your url here)
+      Filename: (input your filename here)
+      Proxy: (input your proxy here)
+    3. The download procedure will start after these inputs.
+      Name: noname.out, Size: ** MB
+      100%|█████| **M/**M [00:01<00:00, **MB/s]
+      Download finished.
+  ```
 
-### Install with pip
-```
-  pip install DriveDownloader
-  ddl URL --filename FILENAME --proxy PROXY
-```
+### Non-interactive Mode
+
+  ```
+    ddl URL --filename FILENAME --proxy PROXY
+  ```
 
 ### Options
 
@@ -52,7 +66,7 @@ Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy 
 ## TODOS
 
  - [x] General downloader API - one class for download, and several inheritance classes to load the configurations.
- - [ ] Command-line UI - apostrophes will not be needed in the newest version.
+ - [x] Command-line UI - apostrophes will not be needed in the newest version.
  - [ ] Window based UI - PyQt, X Window, ...
  - [ ] Support more netdrives - Dropbox, MEGA, ...
  - [ ] Multi-process downloading.
