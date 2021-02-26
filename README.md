@@ -1,6 +1,8 @@
 # DriveDownloader
 
-DriveDownloader is a Python tool for downloading files on online drives. With DriveDownloader, one can download the resources from netdrive with only one command line. It now supports **OneDrive** and **GoogleDrive**.
+DriveDownloader is a Python tool for downloading files on online drives. With DriveDownloader, one can download the resources from netdrive with only one command line. 
+
+DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ## Requirements
 
@@ -14,19 +16,17 @@ DriveDownloader is a Python tool for downloading files on online drives. With Dr
  
 ## Usage
 
-### Source Version
+### Start from source code
 
 ```
-  python main.py URL --filename FILENAME --proxy PROXY
+  python downloader.py URL --filename FILENAME --proxy PROXY
 ```
 
-### Packed Version
+### Install with pip
 ```
-  pip install DriveDownloader -i https://pypi.org/simple
+  pip install DriveDownloader
   ddl URL --filename FILENAME --proxy PROXY
 ```
-
-See release for the details.
 
 ### Options
 
@@ -47,3 +47,11 @@ We extract the size of file by using the "Content-Length" of HTTP response. If t
 **I couldn't connect to the target server through a socks5 proxy.**
 
 Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy server for parsing.
+
+## TODOS
+
+ - [ ] General downloader API - one class for download, and several config files to load the configurations.
+ - [ ] Command-line UI - apostrophes will not be needed in the newest version.
+ - [ ] Support more netdrive - Dropbox, MEGA, ...
+ - [ ] (Optional) automatically change any kind of url to the corresponding direct links.
+ - [ ] (Optional) Widget based UI - PyQt, X Window, ...
