@@ -23,14 +23,16 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ### Interactive Mode
 
+  1. Simply input "ddl" in the shell and press enter.
+  2. The shell will return an interface for inputting the user info.
   ```
-    1. Simply input "ddl" in the shell and press enter.
-    2. The shell will return an interface for inputting the user info.
       ============ Drive Downloader V1.2 ============
       URL: (input your url here)
       Filename: (input your filename here)
       Proxy: (input your proxy here)
-    3. The download procedure will start after these inputs.
+  ```
+  3. The download procedure will start after these inputs.
+  ```
       Name: noname.out, Size: ** MB
       100%|█████| **M/**M [00:01<00:00, **MB/s]
       Download finished.
