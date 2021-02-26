@@ -2,7 +2,13 @@
 
 DriveDownloader is a Python tool for downloading files on online drives. With DriveDownloader, one can download the resources from netdrive with only one command line. 
 
-DriveDownloader now supports **OneDrive** and **GoogleDrive**.
+## Supported Netdrives
+
+ - [x] OneDrive
+ - [x] GoogleDrive
+ - [ ] MEGA
+ - [ ] Dropbox
+ - [ ] More ...
 
 ## Requirements
 
@@ -55,4 +61,5 @@ Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy 
  - [ ] Support more netdrives - Dropbox, MEGA, ...
  - [ ] (Optional) automatically change any kind of url to the corresponding direct link.
  - [ ] (Optional) Widget based UI - PyQt, X Window, ...
- - [ ] Multi-process downloading
+ - [ ] Multi-process downloading.
+ - [ ] Downloading files from a list.
