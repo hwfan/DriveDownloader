@@ -36,6 +36,9 @@ def simple_cli():
         proxy = input("Proxy: ").strip()
 
     final_filename = '' if len(filename) == 0 else filename
+    dirname = os.path.dirname(final_filename)
+    if len(dirname) > 0:
+        os.makedirs(dirname, exist_ok=True)
     final_proxy = proxy if len(proxy) > 0 else None
 
     if '1drv.ms' in url or '1drv.ws' in url:

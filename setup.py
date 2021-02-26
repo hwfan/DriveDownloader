@@ -19,7 +19,7 @@ setup(
     scripts = [],
     entry_points = {
         'console_scripts': [
-            'ddl = downloader:simple_cli'
+            'ddl = DriveDownloader.downloader:simple_cli'
         ]
     }
 )

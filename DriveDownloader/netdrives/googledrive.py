@@ -33,6 +33,4 @@ class GoogleDriveSession(DriveSession):
         token = self.get_confirm_token(response)
         if token:
           self.params["confirm"] = token
-          DriveSession.connect(self, replaced_url, download=True, custom_filename=custom_filename)
-        else:
-          raise NotImplementedError("GoogleDrive - cannot get token from URL!")
+        DriveSession.connect(self, replaced_url, download=True, custom_filename=custom_filename)

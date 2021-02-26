@@ -45,11 +45,11 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
   For the non-interactive mode, please input the user info as arguments after "ddl".
   - Since Linux shell can parse "!" from the url, 
-  - **double quotes(") should be added before and after the url**
+  - **single quotes(') should be added before and after the url**
   - when using non-interactive mode.
 
   ```
-    ddl "URL" --filename FILENAME --proxy PROXY
+    ddl 'URL' --filename FILENAME --proxy PROXY
   ```
 
 ### Options
