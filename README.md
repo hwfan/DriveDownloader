@@ -44,12 +44,15 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ### Options
 
- - `URL`: target url to download from. Since Linux shell can parse "!" from the url, **double quotes** should be added before and after the url.
-    - **URL -> "URL"**
-    - OneDrive Example: "<https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF>"
+ - `URL`: target url to download from. 
+    - Since Linux shell can parse "!" from the url, 
+    - **double quotes(") should be added before and after the url**
+    - when using non-interactive mode.
+    - 
+    - OneDrive Example: <https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF>
     - GoogleDrive Example: 
-      - "<https://drive.google.com/file/d/1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_/view?usp=sharing>"
-      - "<https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_>"
+      - <https://drive.google.com/file/d/1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_/view?usp=sharing>
+      - <https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_>
  - `--filename FILENAME`: (optional) output filename. Example: 'hello.txt'
  - `--proxy PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
 

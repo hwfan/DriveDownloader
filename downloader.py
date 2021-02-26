@@ -22,7 +22,7 @@ def simple_cli():
     sys.stdout.write('============ Drive Downloader V1.2 ============\n')
 
     if len(sys.argv) > 1:
-        # args mode
+        # non-interactive mode
         args = parse_args()
         url = args.url
         assert len(url) > 0, "Invalid URL!"
