@@ -34,7 +34,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
       Filename: (input your filename here)
       Proxy: (input your proxy here)
   ```
-  3. The download procedure will start after these inputs.
+  3. The downloading procedure will start after these inputs.
   ```
       Name: noname.out, Size: ** MB
       100%|█████| **M/**M [00:01<00:00, **MB/s]
@@ -49,7 +49,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
   - when using non-interactive mode.
 
   ```
-    ddl URL --filename FILENAME --proxy PROXY
+    ddl "URL" --filename FILENAME --proxy PROXY
   ```
 
 ### Options
@@ -74,7 +74,7 @@ Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy 
 
 ## TODOS
 
- - [x] General downloader API - one class for download, and several inheritance classes to load the configurations.
+ - [x] General downloader API - one class for downloading, and several inheritance classes to load the configurations.
  - [x] Command-line UI - apostrophes will not be needed in the newest version.
  - [ ] Window based UI - PyQt, X Window, ...
  - [ ] Support more netdrives - Dropbox, MEGA, ...
