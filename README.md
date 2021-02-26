@@ -30,7 +30,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ### Options
 
- - `URL`: target url to download from. Since Linux shell can parse "!" from the url, double quotes should be added before and after the url .
+ - `URL`: target url to download from. Since Linux shell can parse "!" from the url, **double quotes** should be added before and after the url.
     - **URL -> "URL"**
     - OneDrive Example: "<https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF>"
     - GoogleDrive Example: 
