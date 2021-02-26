@@ -28,4 +28,4 @@ def simple_cli():
     download_api(args.url.strip(), args.filename.strip(), final_proxy)
 
 if __name__ == '__main__':
-    cli()
+    simple_cli()
