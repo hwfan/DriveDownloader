@@ -43,7 +43,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ### Non-interactive Mode
 
-  For non-interactive mode, please input the user info as the arguments after "ddl".
+  For the non-interactive mode, please input the user info as arguments after "ddl".
   - Since Linux shell can parse "!" from the url, 
   - **double quotes(") should be added before and after the url**
   - when using non-interactive mode.
@@ -66,7 +66,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 **Why does "Size:Invalid" occur?**
 
-We extract the size of file by using the "Content-Length" of HTTP response. If this parameter is empty, the file size will fall back to "Invalid". (The response of GoogleDrive often hides this header.)
+We extract the size of file from the "Content-Length" of HTTP response. If this parameter is empty, the file size will fall back to "Invalid". (The response of GoogleDrive often hides this header.)
 
 **I couldn't connect to the target server through a socks5 proxy.**
 
