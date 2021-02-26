@@ -24,6 +24,9 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 ### Interactive Mode
 
   1. Simply input "ddl" in the shell and press enter.
+  ```
+      ddl
+  ```
   2. The shell will return an interface for inputting the user info.
   ```
       ============ Drive Downloader V1.2 ============
@@ -40,6 +43,11 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ### Non-interactive Mode
 
+  For non-interactive mode, please input the user info as the arguments after "ddl".
+  - Since Linux shell can parse "!" from the url, 
+  - **double quotes(") should be added before and after the url**
+  - when using non-interactive mode.
+
   ```
     ddl URL --filename FILENAME --proxy PROXY
   ```
@@ -47,10 +55,6 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 ### Options
 
  - `URL`: target url to download from. 
-    - Since Linux shell can parse "!" from the url, 
-    - **double quotes(") should be added before and after the url**
-    - when using non-interactive mode.
-    - 
     - OneDrive Example: <https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF>
     - GoogleDrive Example: 
       - <https://drive.google.com/file/d/1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_/view?usp=sharing>
