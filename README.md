@@ -17,6 +17,8 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 ## Installation
   ```
     pip install DriveDownloader
+    or
+    python setup.py install
   ```
 
 ## Usage
