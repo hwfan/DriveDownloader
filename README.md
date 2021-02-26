@@ -1,6 +1,6 @@
 # DriveDownloader
 
-A useful tool for downloading files on online drives. Now supports **OneDrive** and **GoogleDrive**.
+DriveDownloader is a Python tool for downloading files on online drives. With DriveDownloader, one can download the resources from netdrive with only one command line. It now supports **OneDrive** and **GoogleDrive**.
 
 ## Requirements
 
@@ -14,7 +14,6 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
  
 ## Usage
 
-
 ### Source Version
 
 ```
@@ -27,7 +26,7 @@ A useful tool for downloading files on online drives. Now supports **OneDrive** 
   ddl URL --filename FILENAME --proxy PROXY
 ```
 
-See release for details.
+See release for the details.
 
 ### Options
 

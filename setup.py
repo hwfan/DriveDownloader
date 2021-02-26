@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 setup(
     name = "DriveDownloader",
-    version = "1.1.2-b0",
-    keywords = ("pip", "ddl", "drivedownloader", "hwfan"),
-    description = "Net Drive Downloader with python",
-    long_description = "A useful tool for downloading files on net drives.",
+    version = "1.2.0",
+    keywords = ("drivedownloader", "drive", "netdrive", "download"),
+    description = "A Python netdrive downloader.",
+    long_description = "A Python netdrive downloader.",
     license = "MIT Licence",
 
-    url = "http://hwfan.io",
+    url = "https://hwfan.io",
     author = "hwfan",
     author_email = "hwnorm@outlook.com",
 
@@ -19,7 +19,7 @@ setup(
     scripts = [],
     entry_points = {
         'console_scripts': [
-            'ddl = src.main:main'
+            'ddl = downloader:simple_cli'
         ]
     }
 )

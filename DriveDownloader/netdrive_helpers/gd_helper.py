@@ -4,7 +4,7 @@
 import requests
 import urllib.parse as urlparse
 import sys
-from lib.utils.content_processor import *
+from DriveDownloader.utils.misc import *
 from fake_useragent import UserAgent
 
 def gd_download(url, custom_filename, user_proxy):

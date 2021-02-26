@@ -25,7 +25,7 @@ def format_size(num_size):
 def save_response_content(response, filename, filesize):
     filesize_str = str(format_size(filesize)) if filesize is not None else 'Invalid'
     print('Name:%s, Size:%s' %(filename, filesize_str))
-    progress_bar = tqdm(total=filesize, unit='B', unit_scale=True, unit_divisor=1024)
+    progress_bar = tqdm(total=filesize, ncols=47, unit='B', unit_scale=True, unit_divisor=1024)
     
     CHUNK_SIZE = 32768
     total = 0

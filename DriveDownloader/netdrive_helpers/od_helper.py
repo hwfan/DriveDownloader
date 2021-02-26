@@ -4,7 +4,7 @@
 import requests
 import urllib.parse as urlparse
 import sys
-from lib.utils.content_processor import *
+from DriveDownloader.utils.misc import *
 
 def od_download(url, custom_filename, user_proxy):
     headers={'Accept-Encoding': ''}
