@@ -23,6 +23,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
   2. Install from source code
   ```
+    git clone https://github.com/hwfan/DriveDownloader.git
     python setup.py install
   ```
 
