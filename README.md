@@ -4,6 +4,8 @@ DriveDownloader is a Python tool for downloading files on online drives. With Dr
 
 DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
+**[News] Update version 1.2.1: Repaired OneDrive supporting bug.**
+
 **[News] Update version 1.2: New interface, better project structure and documents.**
 
 ## Requirements
