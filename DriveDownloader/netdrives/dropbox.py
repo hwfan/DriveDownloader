@@ -13,7 +13,7 @@ class DropBoxSession(DriveSession):
     def generate_url(self, url):
         '''
         Solution provided by:
-        https://www.qian.blue/archives/OneDrive-straight.html
+        https://sunpma.com/564.html
         '''
         parsed_url = urlparse.urlparse(url)
         netloc = parsed_url.netloc.replace('www', 'dl-web')
