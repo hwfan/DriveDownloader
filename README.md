@@ -42,9 +42,14 @@ DriveDownloader now supports:
     ddl URL --filename FILENAME --proxy PROXY
   ```
 
-  **Warning for OneDrive user:** 
+  - `URL`: target url to download from. 
+  - `--filename FILENAME`: (optional) output filename. Example: 'hello.txt'
+  - `--proxy PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
+
+### Warning for OneDrive user
 
   Since Linux shell can parse "!" from the url, single quotes(') should be added before and after the url when using non-interactive mode.
+  
 ### Interactive Mode
 
   1. Simply input "ddl" in the shell and press enter.
@@ -65,11 +70,7 @@ DriveDownloader now supports:
       Download finished.
   ```
 
-### Options
 
- - `URL`: target url to download from. 
- - `--filename FILENAME`: (optional) output filename. Example: 'hello.txt'
- - `--proxy PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
 
 ## FAQ
 
