@@ -8,7 +8,7 @@ DriveDownloader now supports:
   - GoogleDrive
   - Dropbox
 
-**[News] Update version 1.3.0: Supported Sharepoint, Dropbox and MEGA. Removed the deprecated fake-useragent.**
+**[News] Update version 1.3.0: Supported Sharepoint and Dropbox. Removed the deprecated fake-useragent.**
 
 **[News] Update version 1.2.1: Repaired OneDrive supporting bug.**
 
