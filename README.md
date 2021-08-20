@@ -2,11 +2,15 @@
 
 DriveDownloader is a Python tool for downloading files on online drives. With DriveDownloader, one can download the resources from netdrive with only one command line. 
 
-DriveDownloader now supports **OneDrive** and **GoogleDrive**.
+DriveDownloader now supports:
+  - OneDrive
+  - OneDrive for Business
+  - GoogleDrive
+  - Dropbox
+
+**[News] Update version 1.3.0: Supported Sharepoint, Dropbox and MEGA. Removed the deprecated fake-useragent.**
 
 **[News] Update version 1.2.1: Repaired OneDrive supporting bug.**
-
-**[News] Update version 1.2: New interface, better project structure and documents.**
 
 ## Requirements
 
@@ -14,7 +18,6 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
     - argparse
     - requests
     - tqdm
-    - fake-useragent
     - pysocks
   - Use `pip install -r requirements.txt` to install the packages.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
@@ -33,6 +36,15 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
 
 ## Usage
 
+### Non-interactive Mode
+
+  ```
+    ddl URL --filename FILENAME --proxy PROXY
+  ```
+
+  **Warning for OneDrive user:** 
+
+  Since Linux shell can parse "!" from the url, single quotes(') should be added before and after the url when using non-interactive mode.
 ### Interactive Mode
 
   1. Simply input "ddl" in the shell and press enter.
@@ -41,7 +53,7 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
   ```
   2. The shell will return an interface for inputting the user info.
   ```
-      ============ Drive Downloader V1.2 ============
+      ============ Drive Downloader ============
       URL: (input your url here)
       Filename: (input your filename here)
       Proxy: (input your proxy here)
@@ -53,24 +65,9 @@ DriveDownloader now supports **OneDrive** and **GoogleDrive**.
       Download finished.
   ```
 
-### Non-interactive Mode
-
-  For the non-interactive mode, please input the user info as arguments after "ddl".
-  - Since Linux shell can parse "!" from the url, 
-  - **single quotes(') should be added before and after the url**
-  - when using non-interactive mode.
-
-  ```
-    ddl 'URL' --filename FILENAME --proxy PROXY
-  ```
-
 ### Options
 
  - `URL`: target url to download from. 
-    - OneDrive Example: <https://1drv.ms/t/s!ArUVoRxpBphY5U-axxe-xf3fidKh?e=kPexEF>
-    - GoogleDrive Example: 
-      - <https://drive.google.com/file/d/1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_/view?usp=sharing>
-      - <https://drive.google.com/open?id=1XQRdK8ewbpOlQn7CvB99aT1FLi6cUKt_>
  - `--filename FILENAME`: (optional) output filename. Example: 'hello.txt'
  - `--proxy PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
 
@@ -84,15 +81,15 @@ We extract the size of file from the "Content-Length" of HTTP response. If this 
 
 Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy server for parsing.
 
-**fake_useragent.errors.FakeUserAgentError: Maximum amount of retries reached**
+<!-- **fake_useragent.errors.FakeUserAgentError: Maximum amount of retries reached**
 
-This message may occur when DriveDownloader is first used. Try again and if this also occurs, please report in the issue.
+This message may occur when DriveDownloader is first used. Try again and if this also occurs, please report in the issue. -->
 
 ## TODOS
 
  - [x] General downloader API - one class for downloading, and several inheritance classes to load the configurations.
  - [x] Command-line UI - apostrophes will not be needed in the newest version.
- - [ ] Window based UI - PyQt, X Window, ...
- - [ ] Support more netdrives - OneDrive for Business, Dropbox, MEGA, ...
- - [ ] Multi-process downloading.
+ - [x] Support more netdrives - OneDrive for Business, Dropbox, ...
  - [ ] Downloading files from a list.
+ - [ ] Multi-process downloading.
+ - [ ] Window based UI - PyQt, X Window, ...

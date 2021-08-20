@@ -11,6 +11,10 @@ class GoogleDriveSession(DriveSession):
         DriveSession.__init__(self, proxy, chunk_size)
     
     def generate_url(self, url):
+        '''
+        Solution provided by:
+        https://stackoverflow.com/questions/25010369/wget-curl-large-file-from-google-drive
+        '''
         parsed_url = urlparse.urlparse(url)
         parsed_qs = urlparse.parse_qs(parsed_url.query)
         if 'id' in parsed_qs:

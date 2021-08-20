@@ -8,19 +8,17 @@ import sys
 import re
 from tqdm import tqdm
 from DriveDownloader.utils.misc import *
-from fake_useragent import UserAgent
 
 class DriveSession:
   def __init__(self, proxy=None, chunk_size=32768):
     self.session = requests.Session()
-    self.ua = UserAgent(verify_ssl=False)
     if proxy is None:
         self.proxies = None
     else:
         self.proxies = { "http": proxy, "https": proxy, }
     self.params = dict()
     self.chunk_size = chunk_size
-    self.headers = { 'Accept-Encoding': '', 'User-Agent': self.ua.random, }
+    self.headers = { 'Accept-Encoding': '', }
   
   def generate_url(self, url):
     raise NotImplementedError

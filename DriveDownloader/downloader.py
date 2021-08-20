@@ -3,8 +3,7 @@
 #  E-mail: hwnorm@outlook.com               #
 #  Homepage: https://github.com/hwfan       #
 #############################################
-from DriveDownloader.netdrives.googledrive import GoogleDriveSession
-from DriveDownloader.netdrives.onedrive import OneDriveSession
+from DriveDownloader.netdrives import *
 import argparse
 import os
 import sys
@@ -18,8 +17,7 @@ def parse_args():
     return args
 
 def simple_cli():
-
-    sys.stdout.write('============ Drive Downloader V1.2 ============\n')
+    sys.stdout.write('============ Drive Downloader ============\n')
 
     if len(sys.argv) > 1:
         # non-interactive mode
@@ -45,6 +43,10 @@ def simple_cli():
         download_session = OneDriveSession(final_proxy)
     elif 'drive.google.com' in url:
         download_session = GoogleDriveSession(final_proxy)
+    elif 'sharepoint' in url:
+        download_session = SharePointSession(final_proxy)
+    elif 'dropbox' in url:
+        download_session = DropBoxSession(final_proxy)
     else:
         raise NotImplementedError("The drive type is not supported!")
     

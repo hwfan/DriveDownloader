@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name = "DriveDownloader",
-    version = "1.2.1-post1",
+    version = "1.3.0",
     keywords = ("drivedownloader", "drive", "netdrive", "download"),
     description = "A Python netdrive downloader.",
     long_description = "A Python netdrive downloader.",
@@ -14,7 +14,7 @@ setup(
     packages = find_packages(),
     include_package_data = True,
     platforms = "any",
-    install_requires = ['argparse', 'requests', 'tqdm', 'fake-useragent', 'pysocks'],
+    install_requires = ['argparse', 'requests', 'tqdm', 'pysocks'],
     
     scripts = [],
     entry_points = {

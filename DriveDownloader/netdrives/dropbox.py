@@ -3,21 +3,23 @@
 #  E-mail: hwnorm@outlook.com               #
 #  Homepage: https://github.com/hwfan       #
 #############################################
-import base64
+import urllib.parse as urlparse
 from DriveDownloader.netdrives.basedrive import DriveSession
 
-class OneDriveSession(DriveSession):
+class DropBoxSession(DriveSession):
     def __init__(self, proxy, chunk_size=32768):
         DriveSession.__init__(self, proxy, chunk_size)
 
     def generate_url(self, url):
         '''
         Solution provided by:
-        https://towardsdatascience.com/how-to-get-onedrive-direct-download-link-ecb52a62fee4
+        https://www.qian.blue/archives/OneDrive-straight.html
         '''
-        data_bytes64 = base64.b64encode(bytes(url, 'utf-8'))
-        data_bytes64_String = data_bytes64.decode('utf-8').replace('/','_').replace('+','-').rstrip("=")
-        resultUrl = f"https://api.onedrive.com/v1.0/shares/u!{data_bytes64_String}/root/content"
+        parsed_url = urlparse.urlparse(url)
+        netloc = parsed_url.netloc.replace('www', 'dl-web')
+        query = ''
+        parsed_url = parsed_url._replace(netloc=netloc, query=query)
+        resultUrl = urlparse.urlunparse(parsed_url)
         return resultUrl
 
     def connect(self, url, custom_filename=''):
