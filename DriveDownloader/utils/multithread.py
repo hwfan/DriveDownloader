@@ -24,7 +24,7 @@ class MultiThreadDownloader:
             if i == self.thread_number - 1:
                 self.ranges.append((str(i * offset), ''))
             else:
-                self.ranges.append((str(i * offset), str((i+1) * offset)))
+                self.ranges.append((str(i * offset), str((i+1) * offset - 1)))
     
     def get(self, url, filename):
         thread_list = []
