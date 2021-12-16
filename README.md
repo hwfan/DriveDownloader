@@ -57,7 +57,7 @@ DriveDownloader now supports:
   ddl test.list -l
   ```
   
-  ** See `tests/run.sh` for more examples. **
+  **See `tests/run.sh` for more examples.**
 
 ### Warning for OneDrive user
 
