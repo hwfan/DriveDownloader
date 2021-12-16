@@ -89,8 +89,11 @@ DriveDownloader now supports:
 
 ### Warning for OneDrive user
 
-  Since Linux shell can parse "!" from the url, single quotes(') should be added before and after the url when using non-interactive mode.
+  Since bash can parse "!" from the url, single quotes(') should be added before and after the url when using bash.
   
+  ```
+  ddl 'https://1drv.ms/t/s!ArUVoRxpBphY5U-a3JznLkLG1uEY?e=czbq1R' -o test_outputs/hello_od.txt
+  ```
 <!-- ### Interactive Mode
 
   1. Simply input "ddl" in the shell and press enter.
