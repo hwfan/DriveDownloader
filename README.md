@@ -44,7 +44,7 @@ DriveDownloader now supports:
                      [--list] [--thread-number NUMBER]
   ```
 
-  - `URL/FILELIST`: target url/filelist to download from. The example of filelist is shown in **test.list**.
+  - `URL/FILELIST`: target url/filelist to download from. **The example of filelist is shown in `tests/test.list`.**.
   - `--filename/-o FILENAME`: (optional) output filename. Example: 'hello.txt'
   - `--proxy/-p PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
   - `--list/-l`: (optional, boolean) choose whether the input is a filelist.
