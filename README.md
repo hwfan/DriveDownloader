@@ -93,7 +93,7 @@ We extract the size of file from the "Content-Length" of HTTP response. If this 
 
 Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy server for parsing.
 
-**There exists some old bugs in my DDL.**
+**There exists some old bugs in my DriveDownloader.**
 
 Try `pip install DriveDownloader --force-reinstall --upgrade` to update. We keep the latest version of DDL free from those bugs.
 
