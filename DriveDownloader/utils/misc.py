@@ -3,18 +3,23 @@
 #  E-mail: hwnorm@outlook.com               #
 #  Homepage: https://github.com/hwfan       #
 #############################################
-def format_size(num_size):
-    try:
-        num_size = float(num_size)
-        KB = num_size / 1024
-    except:
-        return "Error"
-    if KB >= 1024:
-        M = KB / 1024
-        if M >= 1024:
-            G = M / 1024
-            return '%.3f GB' % G
-        else:
-            return '%.3f MB' % M
+def format_size(value):
+    units = ["B", "KB", "MB", "GB", "TB", "PB"]
+    size = 1024.0
+    for i in range(len(units)):
+        if (value / size) < 1:
+            return "%.2f %s" % (value, units[i])
+        value = value / size
+    return value
+
+def judge_session(url):
+    if '1drv.ms' in url or '1drv.ws' in url:
+        return 'OneDrive'
+    elif 'drive.google.com' in url:
+        return 'GoogleDrive'
+    elif 'sharepoint' in url:
+        return 'SharePoint'
+    elif 'dropbox' in url:
+        return 'DropBox'
     else:
-        return '%.3f KB' % KB 
+        return 'DirectLink'

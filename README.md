@@ -8,9 +8,9 @@ DriveDownloader now supports:
   - GoogleDrive
   - Dropbox
 
-**[News] Update version 1.3.0: Supported Sharepoint and Dropbox. Removed the deprecated fake-useragent.**
+**[News] Update version 1.4.0: Supported Multi-thread and downloading from a list and a direct link. Removed interactive mode.**
 
-**[News] Update version 1.2.1: Repaired OneDrive supporting bug.**
+**[News] Update version 1.3.0: Supported Sharepoint and Dropbox. Removed the deprecated fake-useragent.**
 
 ## Requirements
 
@@ -36,21 +36,30 @@ DriveDownloader now supports:
 
 ## Usage
 
-### Non-interactive Mode
+<!-- ### Non-interactive Mode -->
 
   ```
-    ddl URL --filename FILENAME --proxy PROXY
+    ddl URL/FILELIST [--filename FILENAME] [--proxy PROXY] 
+                     [--list] [--thread-number NUMBER]
   ```
 
-  - `URL`: target url to download from. 
-  - `--filename FILENAME`: (optional) output filename. Example: 'hello.txt'
-  - `--proxy PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
+  - `URL/FILELIST`: target url/filelist to download from. The example of filelist is shown in **test.list**.
+  - `--filename/-o FILENAME`: (optional) output filename. Example: 'hello.txt'
+  - `--proxy/-p PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
+  - `--list/-l`: (optional, boolean) choose whether the input is a filelist.
+  - `--thread-number/-n NUMBER`: (optional) the thread number when using multithread.
+
+  Simple Examples:
+  ```
+  ddl https://www.dropbox.com/s/r4bme0kew42oo7e/Get%20Started%20with%20Dropbox.pdf?dl=0 -o test/test.pdf -n 4
+  ddl test.list -l
+  ```
 
 ### Warning for OneDrive user
 
   Since Linux shell can parse "!" from the url, single quotes(') should be added before and after the url when using non-interactive mode.
   
-### Interactive Mode
+<!-- ### Interactive Mode
 
   1. Simply input "ddl" in the shell and press enter.
   ```
@@ -68,9 +77,7 @@ DriveDownloader now supports:
       Name: noname.out, Size: ** MB
       100%|█████| **M/**M [00:01<00:00, **MB/s]
       Download finished.
-  ```
-
-
+  ``` -->
 
 ## FAQ
 
@@ -86,11 +93,11 @@ Try "socks5h" as the protocol prefix instead. It will transmit the url to proxy 
 
 This message may occur when DriveDownloader is first used. Try again and if this also occurs, please report in the issue. -->
 
-## TODOS
+## TODO
 
  - [x] General downloader API - one class for downloading, and several inheritance classes to load the configurations.
  - [x] Command-line UI - apostrophes will not be needed in the newest version.
  - [x] Support more netdrives - OneDrive for Business, Dropbox, ...
- - [ ] Downloading files from a list.
- - [ ] Multi-process downloading.
+ - [x] Downloading files from a list.
+ - [x] Multi-thread downloading.
  - [ ] Window based UI - PyQt, X Window, ...

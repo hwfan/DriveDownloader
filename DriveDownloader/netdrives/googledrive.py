@@ -7,8 +7,8 @@ import urllib.parse as urlparse
 from DriveDownloader.netdrives.basedrive import DriveSession
 
 class GoogleDriveSession(DriveSession):
-    def __init__(self, proxy, chunk_size=32768):
-        DriveSession.__init__(self, proxy, chunk_size)
+    def __init__(self, *args, **kwargs):
+        DriveSession.__init__(self, *args, **kwargs)
     
     def generate_url(self, url):
         '''
@@ -33,8 +33,8 @@ class GoogleDriveSession(DriveSession):
     def connect(self, url, custom_filename=''):
         replaced_url, id_str = self.generate_url(url)
         self.params["id"] = id_str
-        response = DriveSession.connect(self, replaced_url, download=False, custom_filename=custom_filename)
-        token = self.get_confirm_token(response)
+        DriveSession.connect(self, replaced_url, custom_filename=custom_filename)
+        token = self.get_confirm_token(self.response)
         if token:
           self.params["confirm"] = token
-        DriveSession.connect(self, replaced_url, download=True, custom_filename=custom_filename)
+        DriveSession.connect(self, replaced_url, custom_filename=custom_filename)

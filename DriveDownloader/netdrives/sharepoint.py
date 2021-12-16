@@ -7,8 +7,8 @@ import urllib.parse as urlparse
 from DriveDownloader.netdrives.basedrive import DriveSession
 
 class SharePointSession(DriveSession):
-    def __init__(self, proxy, chunk_size=32768):
-        DriveSession.__init__(self, proxy, chunk_size)
+    def __init__(self, *args, **kwargs):
+        DriveSession.__init__(self, *args, **kwargs)
 
     def generate_url(self, url):
         '''
@@ -24,5 +24,5 @@ class SharePointSession(DriveSession):
         return resultUrl
 
     def connect(self, url, custom_filename=''):
-        onedrive_url = self.generate_url(url)
-        DriveSession.connect(self, onedrive_url, download=True, custom_filename=custom_filename)
+        generated_url = self.generate_url(url)
+        DriveSession.connect(self, generated_url, custom_filename=custom_filename)
