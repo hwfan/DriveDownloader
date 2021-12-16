@@ -7,6 +7,7 @@ DriveDownloader now supports:
   - OneDrive for Business
   - GoogleDrive
   - Dropbox
+  - Direct Link
 
 **[News] Update version 1.4.0: Supported Multi-thread and downloading from a list and a direct link. Removed interactive mode.**
 
