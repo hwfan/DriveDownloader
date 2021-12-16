@@ -50,11 +50,14 @@ DriveDownloader now supports:
   - `--list/-l`: (optional, boolean) choose whether the input is a filelist.
   - `--thread-number/-n NUMBER`: (optional) the thread number when using multithread.
 
-  Simple Examples:
+  Simple examples:
+
   ```
   ddl https://www.dropbox.com/s/r4bme0kew42oo7e/Get%20Started%20with%20Dropbox.pdf?dl=0 -o test/test.pdf -n 4
   ddl test.list -l
   ```
+  
+  ** See `tests/run.sh` for more examples. **
 
 ### Warning for OneDrive user
 
