@@ -1,6 +1,6 @@
 # DriveDownloader
 
-**DriveDownloader** is a Python-based **CLI** tool for downloading files on online drives. With DriveDownloader, one can download the resources from netdrive with **only one command line**. 
+**DriveDownloader** is a Python-based **CLI** tool for downloading files on online drives. With DriveDownloader, one can download the resources from **various** online storages with **only one** command line. 
 
 DriveDownloader now supports:
   - OneDrive
@@ -136,7 +136,7 @@ This message may occur when DriveDownloader is first used. Try again and if this
 
  - [x] General downloader API - one class for downloading, and several inheritance classes to load the configurations.
  - [x] Command-line UI - apostrophes will not be needed in the newest version.
- - [x] Support more netdrives - OneDrive for Business, Dropbox, ...
+ - [x] Support - OneDrive for Business, Dropbox, ...
  - [x] Downloading files from a list.
  - [x] Multi-thread downloading.
  - [ ] Window based UI - PyQt, X Window, ...
