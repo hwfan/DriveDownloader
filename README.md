@@ -9,7 +9,7 @@ DriveDownloader now supports:
   - Dropbox
   - Direct Link
 
-**[News] Update version 1.4.0: Supported Multi-thread and downloading from a list and a direct link. Removed interactive mode.**
+**[News] Update version 1.4.0: Supported Multi-thread and downloading from a list. Supported direct downloading. Removed interactive mode.**
 
 **[News] Update version 1.3.0: Supported Sharepoint and Dropbox. Removed the deprecated fake-useragent.**
 
