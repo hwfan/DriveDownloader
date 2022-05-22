@@ -23,7 +23,7 @@ ddl https://www.dropbox.com/s/bd0bak3h9dlfw3z/hello.txt?dl=0 -o test_outputs/hel
 
 echo "Testing File List..."
 # file list
-ddl test.list -l
+ddl test.list
 
 echo "Testing Multi Thread..."
 # Multi Thread

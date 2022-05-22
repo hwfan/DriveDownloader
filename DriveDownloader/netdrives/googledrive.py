@@ -5,6 +5,11 @@
 #############################################
 import urllib.parse as urlparse
 from DriveDownloader.netdrives.basedrive import DriveSession
+from DriveDownloader.pydrive2.auth import GoogleAuth
+from DriveDownloader.pydrive2.drive import GoogleDrive
+
+import os
+import sys
 
 class GoogleDriveSession(DriveSession):
     def __init__(self, *args, **kwargs):
@@ -21,20 +26,28 @@ class GoogleDriveSession(DriveSession):
           id_str = parsed_qs['id'][0]
         else:
           id_str = parsed_url.path.split('/')[3]
-        replaced_url = "https://drive.google.com/uc?export=download"
+        replaced_url = "https://drive.google.com/u/0/uc?export=download"
         return replaced_url, id_str
 
-    def get_confirm_token(self, response):
-        for key, value in response.cookies.items():
-            if key.startswith('download_warning'):
-                return value
-        return None
-
     def connect(self, url, custom_filename=''):
-        replaced_url, id_str = self.generate_url(url)
+      replaced_url, id_str = self.generate_url(url)
+      try:
         self.params["id"] = id_str
+        self.params["confirm"] = "t"
         DriveSession.connect(self, replaced_url, custom_filename=custom_filename)
-        token = self.get_confirm_token(self.response)
-        if token:
-          self.params["confirm"] = token
-        DriveSession.connect(self, replaced_url, custom_filename=custom_filename)
+      except:
+        info = '''+-------------------------------------------------------------------------------------------+
+|Warning: The default request is forbidden by GoogleDrive due to the frequent downloading,  |
+|and DriveDownloader is now using the backup downloader. If this is the first time you meet |
+|the problem, please follow the instructions to login your Google Account. Once this action |
+|is performed, the downloading procedure will automatically start for all the time.         |
++-------------------------------------------------------------------------------------------+'''
+        sys.stdout.write(info+'\n')
+        settings_file_path = os.path.join(os.path.dirname(__file__), 'settings.yaml')
+        gauth = GoogleAuth(settings_file=settings_file_path)
+        gauth.CommandLineAuth()
+        drive = GoogleDrive(gauth)
+        file = drive.CreateFile({"id": id_str})
+        self.filename = file['title'] if len(custom_filename) == 0 else custom_filename
+        self.filesize = float(file['fileSize'])
+        self.response = gauth.service.files().get_media(fileId=id_str)

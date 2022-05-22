@@ -4,6 +4,7 @@
 #  Homepage: https://github.com/hwfan       #
 #############################################
 import requests
+import requests_random_user_agent
 import sys
 import re
 import os
@@ -13,13 +14,13 @@ from DriveDownloader.utils.misc import *
 class DriveSession:
   def __init__(self, proxy=None, chunk_size=32768):
     self.session = requests.Session()
+    self.session.headers['Accept-Encoding'] = ''
     if proxy is None:
         self.proxies = None
     else:
         self.proxies = { "http": proxy, "https": proxy, }
     self.params = dict()
     self.chunk_size = chunk_size
-    self.headers = { 'Accept-Encoding': '', }
     self.filename = ''
     self.filesize = None
     self.response = None
@@ -29,7 +30,7 @@ class DriveSession:
     raise NotImplementedError
   
   def set_range(self, start, end):
-    self.headers['Range'] = 'bytes={:s}-{:s}'.format(start, end)
+    self.session.headers['Range'] = 'bytes={:s}-{:s}'.format(start, end)
 
   def parse_response_header(self):
     try:
@@ -53,11 +54,24 @@ class DriveSession:
     if proc_id == -1:
       self.file_handler = open(self.filename, "wb")
       progress_bar = tqdm(total=self.filesize, ncols=47, unit='B', unit_scale=True, unit_divisor=1024)
-      for chunk in self.response.iter_content(self.chunk_size):
-          if chunk: # filter out keep-alive new chunks
-              self.file_handler.write(chunk)
-              chunk_num = len(chunk)
-              progress_bar.update(chunk_num)
+      if 'googleapiclient' in str(type(self.response)):
+        from googleapiclient.http import MediaIoBaseDownload, DEFAULT_CHUNK_SIZE
+        self.chunk_size = DEFAULT_CHUNK_SIZE
+        downloader = MediaIoBaseDownload(self.file_handler, self.response, self.chunk_size)
+        done = False
+        prev_state = 0
+        cur_state = 0
+        while done is False:
+          status, done = downloader.next_chunk()
+          cur_state = status.resumable_progress
+          progress_bar.update(cur_state - prev_state)
+          prev_state = status.resumable_progress
+      else:
+        for chunk in self.response.iter_content(self.chunk_size):
+            if chunk:
+                self.file_handler.write(chunk)
+                chunk_num = len(chunk)
+                progress_bar.update(chunk_num)
       progress_bar.close()
     else:
       name, ext = os.path.splitext(self.filename)
@@ -78,10 +92,12 @@ class DriveSession:
       progress_bar.close()
 
   def connect(self, url, custom_filename=''):
-    self.response = self.session.get(url, params=self.params, proxies=self.proxies, stream=True, headers=self.headers)
+    self.response = self.session.get(url, params=self.params, proxies=self.proxies, stream=True)
+    if self.response.status_code // 100 >= 4:
+      raise RuntimeError("Bad status code {}. Please check your connection.".format(self.response.status_code))
     filename_parsed, self.filesize = self.parse_response_header()
     self.filename = filename_parsed if len(custom_filename) == 0 else custom_filename
-
+    
   def show_info(self):
     filesize_str = str(format_size(self.filesize)) if self.filesize is not None else 'Invalid'
     sys.stdout.write('Name: {:s}, Size: {:s}\n'.format(self.filename, filesize_str))

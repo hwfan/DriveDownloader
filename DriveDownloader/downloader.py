@@ -4,26 +4,41 @@
 #  Homepage: https://github.com/hwfan       #
 #############################################
 from DriveDownloader.netdrives import get_session
-from DriveDownloader.utils import judge_session, MultiThreadDownloader
+from DriveDownloader.utils import judge_session, MultiThreadDownloader, judge_scheme
 import argparse
 import os
 import sys
+__version__ = "1.5.0"
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Drive Downloader Args')
     parser.add_argument('url', help='URL you want to download from.', default='', type=str)
     parser.add_argument('--filename', '-o', help='Target file name.', default='', type=str)
-    parser.add_argument('--proxy', '-p', help='Proxy address when needed.', default='', type=str)
-    parser.add_argument('--list', '-l', help='Choose whether the input is a filelist.', action='store_true')
-    parser.add_argument('--list-disp', help='The display frequency of list downloading.', type=int, default=1)
     parser.add_argument('--thread-number', '-n', help='thread number of multithread.', type=int, default=1)
+    parser.add_argument('--version', '-v', action='version', version=__version__, help='Version.')
     args = parser.parse_args()
     return args
 
-def download_single_file(url, proxy="", filename="", thread_number=1):
-    used_proxy = proxy if len(proxy) > 0 and proxy != 'None' else None
+def download_single_file(url, filename="", thread_number=1):
+    scheme = judge_scheme(url)
+    if scheme == 'http':
+        if len(os.environ["http_proxy"]) > 0:
+            proxy = os.environ["http_proxy"]
+        else:
+            proxy = None
+    elif scheme == 'https':
+        if len(os.environ["https_proxy"]) > 0:
+            proxy = os.environ["https_proxy"]
+        else:
+            proxy = None
+    else:
+        raise NotImplementedError(f"Unsupported scheme {scheme}")
+    used_proxy = proxy
     session_name = judge_session(url)
     session_func = get_session(session_name)
+    if session_name == 'GoogleDrive' and thread_number > 1:
+        sys.stdout.write('Warning: Google Drive URL detected. Only one thread will be created.\n')
+        thread_number = 1
     download_session = session_func(used_proxy)
     download_session.connect(url, filename)
     final_filename = download_session.filename
@@ -40,18 +55,18 @@ def download_filelist(args):
     for line_idx, line in enumerate(lines):
         splitted_line = line.strip().split(" ")
         download_single_file(*splitted_line, args.thread_number)
-        if (line_idx + 1) % args.list_disp == 0:
-            sys.stdout.write("Filelist downloaded {:d} / {:d}\n".format(line_idx+1, len(lines)))
+        sys.stdout.write("Filelist downloaded {:d} / {:d}\n".format(line_idx+1, len(lines)))
 
 def simple_cli():
-    assert len(sys.argv) > 1, "Please input your URL or filelist path!"
     sys.stdout.write('============ Drive Downloader ============\n')
     args = parse_args()
-    if not args.list:
-        download_single_file(args.url, args.proxy, args.filename, args.thread_number)
-    else:
+    assert len(args.url) > 0, "Please input your URL or filelist path!"
+    if os.path.exists(args.url):
         sys.stdout.write('Downloading filelist: {:s}\n'.format(os.path.basename(args.url)))
         download_filelist(args)
+    else:
+        download_single_file(args.url, args.filename, args.thread_number)
+        
     sys.stdout.write('Download finished.\n')
 
 if __name__ == '__main__':

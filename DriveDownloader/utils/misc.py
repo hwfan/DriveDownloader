@@ -3,6 +3,8 @@
 #  E-mail: hwnorm@outlook.com               #
 #  Homepage: https://github.com/hwfan       #
 #############################################
+from urllib.parse import urlparse
+
 def format_size(value):
     units = ["B", "KB", "MB", "GB", "TB", "PB"]
     size = 1024.0
@@ -23,3 +25,6 @@ def judge_session(url):
         return 'DropBox'
     else:
         return 'DirectLink'
+
+def judge_scheme(url):
+    return urlparse(url).scheme
