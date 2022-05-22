@@ -18,16 +18,15 @@ DriveDownloader当前支持：
 ## 命令用法
 
   ```
-    ddl URL/FILELIST [--filename FILENAME] [--proxy PROXY] 
-                     [--list] [--thread-number NUMBER]
+    ddl URL/FILELIST [--filename FILENAME] [--thread-number NUMBER] [--version] [--help]
   ```
 
   - `URL/FILELIST`: 目标的URL或者文件列表。**文件列表的格式请参考：`tests/test.list`.**
   - `--filename/-o FILENAME`: (可选) 输出的文件名，如'hello.txt'
-  - `--proxy/-p PROXY`: (可选) 代理服务器地址，如`--proxy http://example.com:80`
-  - `--list/-l`: (可选) 选择命令的输入是文件列表还是URL。有此flag时，输入为文件列表，反之则为URL。
   - `--thread-number/-n NUMBER`: (可选) 多线程的线程数量。
- 
+  - 使用代理服务器：
+      - 请将环境变量 `http_proxy` 与 `https_proxy` 设置成你的代理服务器地址，DriveDownloader会自动读取它们。
+
 ## 安装方式
 
   1. 从pip安装

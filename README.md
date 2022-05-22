@@ -18,16 +18,15 @@ DriveDownloader now supports:
 ## Usage
 
   ```
-    ddl URL/FILELIST [--filename FILENAME] [--proxy PROXY] 
-                     [--list] [--thread-number NUMBER]
+    ddl URL/FILELIST [--filename FILENAME] [--thread-number NUMBER] [--version] [--help]
   ```
 
   - `URL/FILELIST`: target url/filelist to download from. **The example of filelist is shown in `tests/test.list`.**
   - `--filename/-o FILENAME`: (optional) output filename. Example: 'hello.txt'
-  - `--proxy/-p PROXY`: (optional) the proxy address through which to download the file. Example: `--proxy http://example.com:80`
-  - `--list/-l`: (optional, boolean) choose whether the input is a filelist.
   - `--thread-number/-n NUMBER`: (optional) the thread number when using multithread.
- 
+  - Using proxy:
+      - Set the environment variables `http_proxy` and `https_proxy` to your proxy addresses, and DriveDownloader will automatically read them.
+
 ## Installation
   1. Install from pip
   ```
