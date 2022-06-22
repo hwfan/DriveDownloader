@@ -11,10 +11,6 @@ DriveDownloader now supports:
   - Dropbox
   - Direct Link
 
-## Quick Start
-  
-  Coming Soon.
-
 ## Usage
 
   ```
@@ -39,13 +35,13 @@ DriveDownloader now supports:
     python setup.py install
   ```
 
+## Quick Start
+  
+  Coming Soon.
+
 ## Requirements
 
   - Python 3
-    - argparse
-    - requests
-    - tqdm
-    - pysocks
   - Use `pip install -r requirements.txt` to install the packages.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
@@ -119,6 +115,12 @@ DriveDownloader now supports:
  - [ ] Quick Start.
 
 ## Update Log
+
+### v1.6.0
+
+- (WIP) Added automatic resume downloading.
+- (WIP) Added the 256-color based progress bar (adapted to the terminal setting).
+- (WIP) The progress bar of multi-thread downloading is now sorted.
 
 ### v1.5.0
 

@@ -11,10 +11,6 @@ DriveDownloader当前支持：
   - Dropbox
   - 直链
 
-## 快速开始
-  
-  制作中，与新版本共同发布。
-
 ## 命令用法
 
   ```
@@ -40,13 +36,13 @@ DriveDownloader当前支持：
     python setup.py install
   ```
 
+## 快速开始
+  
+  制作中，与新版本共同发布。
+
 ## 依赖
 
   - Python 3
-    - argparse
-    - requests
-    - tqdm
-    - pysocks
   - 请使用`pip install -r requirements.txt`安装依赖。
  
 ## 用例
@@ -116,8 +112,15 @@ DriveDownloader当前支持：
  - [x] 多线程下载
  - [ ] 断点续传
  - [ ] 基于窗口的UI
-
+ - [ ] 快速开始
+ 
 ## 更新日志
+
+### v1.6.0
+
+- (WIP) 增加断点续传功能。
+- (WIP) 增加256色的进度条，并适配终端的色彩设置。
+- (WIP) 多线程下载的进度条现在严格按线程顺序排列。
 
 ### v1.5.0
 
