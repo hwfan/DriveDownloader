@@ -104,6 +104,10 @@ DriveDownloader当前支持：
     ddl 'https://1drv.ms/t/s!ArUVoRxpBphY5U-a3JznLkLG1uEY?e=czbq1R' -o test_outputs/hello_od.txt
     ```
 
+## 鸣谢
+
+本项目的部分代码来源于[PyDrive2](https://github.com/iterative/PyDrive2)与[rich](https://github.com/Textualize/rich)。感谢他们优秀的工作！
+
 ## 开发计划
 
  - [x] 通用的下载API - 一个下载类，多个网盘下载的继承类。

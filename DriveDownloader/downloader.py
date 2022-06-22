@@ -98,7 +98,7 @@ def download_single_file(url, filename="", thread_number=1, list_suffix=None):
         interrupted = download_session.save_response_content(progress_bar=progress_applied)
         if interrupted:
             return
-    console.print('Finished.'.format(final_filename))
+    console.print('[green]Finished.')
 
 def download_filelist(args):
     lines = [line for line in open(args.url, 'r')]

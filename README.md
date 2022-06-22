@@ -104,6 +104,10 @@ DriveDownloader now supports:
     ddl 'https://1drv.ms/t/s!ArUVoRxpBphY5U-a3JznLkLG1uEY?e=czbq1R' -o test_outputs/hello_od.txt
     ```
 
+## Acknowledgement
+
+Some code of DriveDownloader is borrowed from [PyDrive2](https://github.com/iterative/PyDrive2) and [rich](https://github.com/Textualize/rich). Thanks for their wonderful jobs!
+
 ## TODOs
 
  - [x] General downloader API - one class for downloading, and several inheritance classes to load the configurations.
