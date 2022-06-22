@@ -2,14 +2,15 @@ import copy
 import threading
 import shutil
 import os
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def download_session(session_func, url, filename, proc_id, start, end, used_proxy, progress_bar):
     drive_session = session_func(used_proxy)
     drive_session.set_range(start, end)
     drive_session.connect(url, filename)
-    drive_session.save_response_content(start=start, proc_id=proc_id, progress_bar=progress_bar)
-    
+    interrupted = drive_session.save_response_content(start=start, proc_id=proc_id, progress_bar=progress_bar)
+    return interrupted
+
 class MultiThreadDownloader:
     def __init__(self, progress_bar, session_func, used_proxy, filesize, thread_number):
         self.progress = progress_bar
@@ -31,11 +32,20 @@ class MultiThreadDownloader:
     def get(self, url, filename):
         with self.progress:
             with ThreadPoolExecutor(max_workers=len(self.ranges)) as pool:
+                ts = []
+                status = []
                 for proc_id, each_range in enumerate(self.ranges):
                     start, end = each_range
                     task_id = self.progress.add_task("download", filename=filename, proc_id=proc_id, start=False)
-                    pool.submit(download_session, self.session_func, url, filename, proc_id, start, end, self.used_proxy, self.progress)
-    
+                    t = pool.submit(download_session, self.session_func, url, filename, proc_id, start, end, self.used_proxy, self.progress)
+                    ts.append(t)
+                for t in as_completed(ts):
+                    interrupted = t.result()
+                    status.append(interrupted)
+        if True in status:
+            return True
+        return False
+
     def concatenate(self, filename):
         sub_filenames = []
         dirname = os.path.dirname(filename)

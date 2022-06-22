@@ -90,10 +90,15 @@ def download_single_file(url, filename="", thread_number=1, list_suffix=None):
 
     if thread_number > 1:
         download_session = MultiThreadDownloader(progress_applied, session_func, used_proxy, download_session.filesize, thread_number)
-        download_session.get(url, final_filename)
+        interrupted = download_session.get(url, final_filename)
+        if interrupted:
+            return 
         download_session.concatenate(final_filename)
     else:
-        download_session.save_response_content(progress_bar=progress_applied)
+        interrupted = download_session.save_response_content(progress_bar=progress_applied)
+        if interrupted:
+            return
+    console.print('Finished.'.format(final_filename))
 
 def download_filelist(args):
     lines = [line for line in open(args.url, 'r')]
@@ -116,8 +121,6 @@ def simple_cli():
         download_filelist(args)
     else:
         download_single_file(args.url, args.filename, args.thread_number)
-        
-    console.print('Download finished.')
 
 if __name__ == '__main__':
     simple_cli()

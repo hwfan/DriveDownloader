@@ -57,7 +57,7 @@ class DriveSession:
     dirname = os.path.dirname(self.filename)
     if len(dirname) > 0:
         os.makedirs(dirname, exist_ok=True)
-    
+    interrupted = False
     if proc_id == -1:
       self.file_handler = open(self.filename, "wb")
       with progress_bar:
@@ -77,7 +77,8 @@ class DriveSession:
             progress_bar.update(0, advance=cur_state - prev_state)
             prev_state = status.resumable_progress
             if done_event.is_set():
-                return
+                interrupted = True
+                return interrupted
         else:
           for chunk in self.response.iter_content(self.chunk_size):
               if chunk:
@@ -85,7 +86,8 @@ class DriveSession:
                   chunk_num = len(chunk)
                   progress_bar.update(0, advance=chunk_num)
                   if done_event.is_set():
-                    return
+                    interrupted = True
+                    return interrupted
     else:
       name, ext = os.path.splitext(self.filename)
       name = name + '_{}'.format(proc_id)
@@ -104,7 +106,9 @@ class DriveSession:
               chunk_num = len(chunk)
               progress_bar.update(proc_id, advance=chunk_num)
               if done_event.is_set():
-                return
+                interrupted = True
+                return interrupted
+    return interrupted
   def connect(self, url, custom_filename=''):
     self.response = self.session.get(url, params=self.params, proxies=self.proxies, stream=True)
     if self.response.status_code // 100 >= 4:
@@ -114,4 +118,4 @@ class DriveSession:
     
   def show_info(self, progress_bar, list_suffix):
     filesize_str = str(format_size(self.filesize)) if self.filesize is not None else 'Invalid'
-    progress_bar.console.print('{:s} Name: {:s}, Size: {:s}'.format(list_suffix, self.filename, filesize_str))
+    progress_bar.console.print('{:s}Name: {:s}, Size: {:s}'.format(list_suffix+' ' if list_suffix else '', self.filename, filesize_str))
