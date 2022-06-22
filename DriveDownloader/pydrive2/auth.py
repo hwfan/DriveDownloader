@@ -1,3 +1,5 @@
+# Credit: https://github.com/iterative/PyDrive2
+
 import socket
 import webbrowser
 import httplib2

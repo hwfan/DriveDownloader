@@ -119,8 +119,7 @@ DriveDownloader当前支持：
 ### v1.6.0
 
 - (WIP) 增加断点续传功能。
-- (WIP) 增加256色的进度条，并适配终端的色彩设置。
-- (WIP) 多线程下载的进度条现在严格按线程顺序排列。
+- 采用新的进度条管理器[rich](https://github.com/Textualize/rich)。
 
 ### v1.5.0
 

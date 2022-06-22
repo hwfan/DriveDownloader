@@ -1,3 +1,5 @@
+# Credit: https://github.com/iterative/PyDrive2
+
 from yaml import load
 from yaml import YAMLError
 import os

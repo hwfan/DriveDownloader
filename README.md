@@ -119,8 +119,7 @@ DriveDownloader now supports:
 ### v1.6.0
 
 - (WIP) Added automatic resume downloading.
-- (WIP) Added the 256-color based progress bar (adapted to the terminal setting).
-- (WIP) The progress bar of multi-thread downloading is now sorted.
+- Changed the progress bar manager to [rich](https://github.com/Textualize/rich).
 
 ### v1.5.0
 

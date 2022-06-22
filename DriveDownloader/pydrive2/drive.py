@@ -1,3 +1,5 @@
+# Credit: https://github.com/iterative/PyDrive2
+
 from .apiattr import ApiAttributeMixin
 from .files import GoogleDriveFile
 from .files import GoogleDriveFileList
