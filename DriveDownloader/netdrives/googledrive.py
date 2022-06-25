@@ -54,11 +54,11 @@ class GoogleDriveSession(DriveSession):
         DriveSession.connect(self, replaced_url, custom_filename=custom_filename)
       except:
         info = '''+-------------------------------------------------------------------------------------------+
-  |Warning: The default request is forbidden by GoogleDrive due to the frequent downloading,  |
-  |and DriveDownloader is now using the backup downloader. If this is the first time you meet |
-  |the problem, please follow the instructions to login your Google Account. Once this action |
-  |is performed, the downloading procedure will automatically start for all the time.         |
-  +-------------------------------------------------------------------------------------------+'''
+|Warning: The default request is forbidden by GoogleDrive due to the frequent downloading,  |
+|and DriveDownloader is now using the backup downloader. If this is the first time you meet |
+|the problem, please follow the instructions to login your Google Account. Once this action |
+|is performed, the downloading procedure will automatically start for all the time.         |
++-------------------------------------------------------------------------------------------+'''
         console.print(info)
         settings_file_path = os.path.join(os.path.dirname(__file__), 'settings.yaml')
         if not os.path.exists(settings_file_path):
