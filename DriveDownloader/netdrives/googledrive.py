@@ -10,7 +10,6 @@ from DriveDownloader.pydrive2.drive import GoogleDrive
 
 import os
 import sys
-from rich.console import Console
 
 googleauthdata = '''
 client_config_backend: settings
@@ -27,7 +26,6 @@ oauth_scope:
   - https://www.googleapis.com/auth/drive
 '''
 
-console = Console()
 class GoogleDriveSession(DriveSession):
     def __init__(self, *args, **kwargs):
         DriveSession.__init__(self, *args, **kwargs)
@@ -59,7 +57,7 @@ class GoogleDriveSession(DriveSession):
 |the problem, please follow the instructions to login your Google Account. Once this action |
 |is performed, the downloading procedure will automatically start for all the time.         |
 +-------------------------------------------------------------------------------------------+'''
-        console.print(info)
+        sys.stdout.write(info+'\n')
         settings_file_path = os.path.join(os.path.dirname(__file__), 'settings.yaml')
         if not os.path.exists(settings_file_path):
           with open(settings_file_path, "w") as f:
