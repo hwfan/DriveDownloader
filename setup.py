@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name = "DriveDownloader",
-    version = "1.5.0",
+    version = "1.5.0.post1",
     keywords = ("drivedownloader", "drive", "netdrive", "download"),
     description = "A Python netdrive downloader.",
     long_description = "A Python netdrive downloader.",
