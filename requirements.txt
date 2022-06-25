@@ -1,6 +1,7 @@
 argparse
 requests
 tqdm
+rich
 pysocks
 requests_random_user_agent
 google-api-python-client >= 1.12.5

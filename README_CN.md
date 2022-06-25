@@ -42,7 +42,7 @@ DriveDownloader当前支持：
 
 ## 依赖
 
-  - Python 3
+  - Python 3.7+
   - 请使用`pip install -r requirements.txt`安装依赖。
  
 ## 用例

@@ -41,7 +41,7 @@ DriveDownloader now supports:
 
 ## Requirements
 
-  - Python 3
+  - Python 3.7+
   - Use `pip install -r requirements.txt` to install the packages.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  

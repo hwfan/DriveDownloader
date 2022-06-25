@@ -12,6 +12,21 @@ import os
 import sys
 from rich.console import Console
 
+googleauthdata = '''
+client_config_backend: settings
+client_config:
+  client_id: 367116221053-7n0vf5akeru7on6o2fjinrecpdoe99eg.apps.googleusercontent.com
+  client_secret: 1qsNodXNaWq1mQuBjUjmvhoO
+
+save_credentials: True
+save_credentials_backend: file
+
+get_refresh_token: True
+
+oauth_scope:
+  - https://www.googleapis.com/auth/drive
+'''
+
 console = Console()
 class GoogleDriveSession(DriveSession):
     def __init__(self, *args, **kwargs):
@@ -39,13 +54,16 @@ class GoogleDriveSession(DriveSession):
         DriveSession.connect(self, replaced_url, custom_filename=custom_filename)
       except:
         info = '''+-------------------------------------------------------------------------------------------+
-|Warning: The default request is forbidden by GoogleDrive due to the frequent downloading,  |
-|and DriveDownloader is now using the backup downloader. If this is the first time you meet |
-|the problem, please follow the instructions to login your Google Account. Once this action |
-|is performed, the downloading procedure will automatically start for all the time.         |
-+-------------------------------------------------------------------------------------------+'''
+  |Warning: The default request is forbidden by GoogleDrive due to the frequent downloading,  |
+  |and DriveDownloader is now using the backup downloader. If this is the first time you meet |
+  |the problem, please follow the instructions to login your Google Account. Once this action |
+  |is performed, the downloading procedure will automatically start for all the time.         |
+  +-------------------------------------------------------------------------------------------+'''
         console.print(info)
         settings_file_path = os.path.join(os.path.dirname(__file__), 'settings.yaml')
+        if not os.path.exists(settings_file_path):
+          with open(settings_file_path, "w") as f:
+            f.write(googleauthdata)
         gauth = GoogleAuth(settings_file=settings_file_path)
         gauth.CommandLineAuth()
         drive = GoogleDrive(gauth)
