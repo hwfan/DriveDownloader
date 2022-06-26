@@ -23,6 +23,6 @@ class DirectLink(DriveSession):
     def generate_url(self, url):
         return url
 
-    def connect(self, url, custom_filename=''):
+    def connect(self, url, custom_filename='', proc_id=-1, force_backup=False):
         generated_url = self.generate_url(url)
         DriveSession.connect(self, generated_url, custom_filename=custom_filename)

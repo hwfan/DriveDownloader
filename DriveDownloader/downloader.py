@@ -22,11 +22,11 @@ from rich.progress import (
 MAJOR_VERSION = 1
 MINOR_VERSION = 6
 POST_VERSION = 0
-__version__ = "{MAJOR_VERSION}.{MINOR_VERSION}.{POST_VERSION}"
-console = Console()
+__version__ = f"{MAJOR_VERSION}.{MINOR_VERSION}.{POST_VERSION}"
+console = Console(width=72)
 single_progress = Progress(
     TextColumn("[bold blue]Downloading: ", justify="left"),
-    BarColumn(bar_width=None),
+    BarColumn(bar_width=15),
     "[progress.percentage]{task.percentage:>3.1f}%",
     "|",
     DownloadColumn(),
@@ -38,7 +38,7 @@ single_progress = Progress(
 )
 multi_progress = Progress(
     TextColumn("[bold blue]Thread {task.fields[proc_id]}: ", justify="left"),
-    BarColumn(bar_width=None),
+    BarColumn(bar_width=15),
     "[progress.percentage]{task.percentage:>3.1f}%",
     "|",
     DownloadColumn(),
@@ -55,10 +55,11 @@ def parse_args():
     parser.add_argument('--filename', '-o', help='Target file name.', default='', type=str)
     parser.add_argument('--thread-number', '-n', help='thread number of multithread.', type=int, default=1)
     parser.add_argument('--version', '-v', action='version', version=__version__, help='Version.')
+    parser.add_argument('--force-back-google','-F',help='Force to use the backup downloader for GoogleDrive.', action='store_true')
     args = parser.parse_args()
     return args
 
-def download_single_file(url, filename="", thread_number=1, list_suffix=None):
+def download_single_file(url, filename="", thread_number=1, force_back_google=False, list_suffix=None):
     scheme = judge_scheme(url)
     if scheme == 'http':
         if len(os.environ["http_proxy"]) > 0:
@@ -77,12 +78,12 @@ def download_single_file(url, filename="", thread_number=1, list_suffix=None):
     session_name = judge_session(url)
     session_func = get_session(session_name)
     google_fix_logic = False
-    if session_name == 'GoogleDrive' and thread_number > 1:
+    if session_name == 'GoogleDrive' and thread_number > 1 and not force_back_google:
         thread_number = 1
         google_fix_logic = True
     progress_applied = multi_progress if thread_number > 1 else single_progress
     download_session = session_func(used_proxy)
-    download_session.connect(url, filename)
+    download_session.connect(url, filename, force_backup=force_back_google if session_name == 'GoogleDrive' else False)
     final_filename = download_session.filename
     download_session.show_info(progress_applied, list_suffix)
     if google_fix_logic:
@@ -90,15 +91,17 @@ def download_single_file(url, filename="", thread_number=1, list_suffix=None):
 
     if thread_number > 1:
         download_session = MultiThreadDownloader(progress_applied, session_func, used_proxy, download_session.filesize, thread_number)
-        interrupted = download_session.get(url, final_filename)
+        interrupted = download_session.get(url, final_filename, force_back_google)
         if interrupted:
             return 
         download_session.concatenate(final_filename)
     else:
-        interrupted = download_session.save_response_content(progress_bar=progress_applied)
-        if interrupted:
-            return
-    console.print('[green]Finished.')
+        with progress_applied:
+            task_id = progress_applied.add_task("download", filename=final_filename, proc_id=0, start=False)
+            interrupted = download_session.save_response_content(progress_bar=progress_applied)
+            if interrupted:
+                return
+    console.print('[green]Bye.')
 
 def download_filelist(args):
     lines = [line for line in open(args.url, 'r')]
@@ -108,19 +111,19 @@ def download_filelist(args):
         download_single_file(*splitted_line, args.thread_number, list_suffix)
 
 def simple_cli():
-    console.print(f"*******************************************************")
-    console.print(f"*                                                     *")
-    console.print(f"*             DriveDownloader {MAJOR_VERSION}.{MINOR_VERSION}.{POST_VERSION}                   *")
-    console.print(f"*  Homesite: https://github.com/hwfan/DriveDownloader *")
-    console.print(f"*                                                     *")
-    console.print(f"*******************************************************")
+    console.print(f"***********************************************************************")
+    console.print(f"*                                                                     *")
+    console.print(f"*                     DriveDownloader {MAJOR_VERSION}.{MINOR_VERSION}.{POST_VERSION}                           *")
+    console.print(f"*          Homesite: https://github.com/hwfan/DriveDownloader         *")
+    console.print(f"*                                                                     *")
+    console.print(f"***********************************************************************")
     args = parse_args()
     assert len(args.url) > 0, "Please input your URL or filelist path!"
     if os.path.exists(args.url):
         console.print('Downloading filelist: {:s}'.format(os.path.basename(args.url)))
         download_filelist(args)
     else:
-        download_single_file(args.url, args.filename, args.thread_number)
+        download_single_file(args.url, args.filename, args.thread_number, args.force_back_google)
 
 if __name__ == '__main__':
     simple_cli()
