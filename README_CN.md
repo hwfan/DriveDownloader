@@ -14,15 +14,18 @@ DriveDownloader当前支持：
 ## 命令用法
 
   ```
-    ddl URL/FILELIST [--filename FILENAME] [--thread-number NUMBER] [--version] [--help]
+    ddl URL/FILELIST [--filename FILENAME] [--thread-number NUMBER] [--force-back-google] [--version] [--help]
   ```
 
   - `URL/FILELIST`: 目标的URL或者文件列表。**文件列表的格式请参考：`tests/test.list`.**
   - `--filename/-o FILENAME`: (可选) 输出的文件名，如'hello.txt'
   - `--thread-number/-n NUMBER`: (可选) 多线程的线程数量。
+  - `--force-back-google/-F`: (可选) 对于谷歌网盘使用备份下载器 (需要谷歌账号认证，但可以保证稳定连接)
   - 使用代理服务器：
       - 请将环境变量 `http_proxy` 与 `https_proxy` 设置成你的代理服务器地址，DriveDownloader会自动读取它们。
-
+  - 断点续传:
+      - 如果您的下载意外中断，只需要重启同样的命令即可恢复。
+      
 ## 安装方式
 
   1. 从pip安装
@@ -114,7 +117,7 @@ DriveDownloader当前支持：
  - [x] 支持更多网盘 - OneDrive for Business, Dropbox, 直链等。
  - [x] 从列表下载
  - [x] 多线程下载
- - [ ] 断点续传
+ - [x] 断点续传
  - [ ] 基于窗口的UI
  - [ ] 快速开始
  
@@ -122,7 +125,7 @@ DriveDownloader当前支持：
 
 ### v1.6.0
 
-- (WIP) 增加断点续传功能。
+- 增加断点续传功能。
 - 采用新的进度条管理器[rich](https://github.com/Textualize/rich)。
 
 ### v1.5.0

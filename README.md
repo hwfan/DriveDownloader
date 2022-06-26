@@ -20,9 +20,12 @@ DriveDownloader now supports:
   - `URL/FILELIST`: target url/filelist to download from. **The example of filelist is shown in `tests/test.list`.**
   - `--filename/-o FILENAME`: (optional) output filename. Example: 'hello.txt'
   - `--thread-number/-n NUMBER`: (optional) the thread number when using multithread.
+  - `--force-back-google/-F`: (optional) use the backup downloader for Google drive (it needs authentication, but is more stable).
   - Using proxy:
       - Set the environment variables `http_proxy` and `https_proxy` to your proxy addresses, and DriveDownloader will automatically read them.
-
+  - Resume:
+      - If your download was interrupted accidentally, simply restart the command will resume, regardless the number of threads.
+      
 ## Installation
   1. Install from pip
   ```
@@ -114,7 +117,7 @@ Some code of DriveDownloader is borrowed from [PyDrive2](https://github.com/iter
  - [x] Support more netdrives - OneDrive for Business, Dropbox, ...
  - [x] Downloading files from a list.
  - [x] Multi-thread downloading.
- - [ ] Resume downloading.
+ - [x] Resume downloading.
  - [ ] Window-based UI.
  - [ ] Quick Start.
 
@@ -122,7 +125,7 @@ Some code of DriveDownloader is borrowed from [PyDrive2](https://github.com/iter
 
 ### v1.6.0
 
-- (WIP) Added automatic resume downloading.
+- Added automatic resume downloading.
 - Changed the progress bar manager to [rich](https://github.com/Textualize/rich).
 
 ### v1.5.0
