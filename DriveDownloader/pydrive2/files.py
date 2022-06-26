@@ -1,3 +1,5 @@
+# Credit: https://github.com/iterative/PyDrive2
+
 import io
 import mimetypes
 import json

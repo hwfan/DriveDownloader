@@ -20,6 +20,6 @@ class OneDriveSession(DriveSession):
         resultUrl = f"https://api.onedrive.com/v1.0/shares/u!{data_bytes64_String}/root/content"
         return resultUrl
 
-    def connect(self, url, custom_filename=''):
+    def connect(self, url, custom_filename='', proc_id=-1, force_backup=False):
         generated_url = self.generate_url(url)
         DriveSession.connect(self, generated_url, custom_filename=custom_filename)

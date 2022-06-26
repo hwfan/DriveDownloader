@@ -22,6 +22,6 @@ class DropBoxSession(DriveSession):
         resultUrl = urlparse.urlunparse(parsed_url)
         return resultUrl
 
-    def connect(self, url, custom_filename=''):
+    def connect(self, url, custom_filename='', proc_id=-1, force_backup=False):
         generated_url = self.generate_url(url)
         DriveSession.connect(self, generated_url, custom_filename=custom_filename)

@@ -11,10 +11,6 @@ DriveDownloader now supports:
   - Dropbox
   - Direct Link
 
-## Quick Start
-  
-  Coming Soon.
-
 ## Usage
 
   ```
@@ -24,9 +20,12 @@ DriveDownloader now supports:
   - `URL/FILELIST`: target url/filelist to download from. **The example of filelist is shown in `tests/test.list`.**
   - `--filename/-o FILENAME`: (optional) output filename. Example: 'hello.txt'
   - `--thread-number/-n NUMBER`: (optional) the thread number when using multithread.
+  - `--force-back-google/-F`: (optional) use the backup downloader for Google drive (it needs authentication, but is more stable).
   - Using proxy:
       - Set the environment variables `http_proxy` and `https_proxy` to your proxy addresses, and DriveDownloader will automatically read them.
-
+  - Resume:
+      - If your download was interrupted accidentally, simply restart the command will resume, regardless the number of threads.
+      
 ## Installation
   1. Install from pip
   ```
@@ -39,13 +38,13 @@ DriveDownloader now supports:
     python setup.py install
   ```
 
+## Quick Start
+  
+  Coming Soon.
+
 ## Requirements
 
-  - Python 3
-    - argparse
-    - requests
-    - tqdm
-    - pysocks
+  - Python 3.7+
   - Use `pip install -r requirements.txt` to install the packages.
   - Proxy server if necessary. **We don't provide proxy service for DriveDownloader.**
  
@@ -108,17 +107,26 @@ DriveDownloader now supports:
     ddl 'https://1drv.ms/t/s!ArUVoRxpBphY5U-a3JznLkLG1uEY?e=czbq1R' -o test_outputs/hello_od.txt
     ```
 
+## Acknowledgement
+
+Some code of DriveDownloader is borrowed from [PyDrive2](https://github.com/iterative/PyDrive2) and [rich](https://github.com/Textualize/rich). Thanks for their wonderful jobs!
+
 ## TODOs
 
  - [x] General downloader API - one class for downloading, and several inheritance classes to load the configurations.
  - [x] Support more netdrives - OneDrive for Business, Dropbox, ...
  - [x] Downloading files from a list.
  - [x] Multi-thread downloading.
- - [ ] Resume downloading.
+ - [x] Resume downloading.
  - [ ] Window-based UI.
  - [ ] Quick Start.
 
 ## Update Log
+
+### v1.6.0
+
+- Added automatic resume downloading.
+- Changed the progress bar manager to [rich](https://github.com/Textualize/rich).
 
 ### v1.5.0
 

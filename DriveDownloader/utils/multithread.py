@@ -2,15 +2,18 @@ import copy
 import threading
 import shutil
 import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-def download_session(session_func, url, filename, proc_id, start, end, used_proxy):
+def download_session(session_func, url, filename, proc_id, start, end, used_proxy, progress_bar, force_back_google):
     drive_session = session_func(used_proxy)
     drive_session.set_range(start, end)
-    drive_session.connect(url, filename)
-    drive_session.save_response_content(start=start, proc_id=proc_id)
-    
+    drive_session.connect(url, filename, proc_id=proc_id, force_backup=force_back_google)
+    interrupted = drive_session.save_response_content(start=int(start), end=int(end), proc_id=proc_id, progress_bar=progress_bar)
+    return interrupted
+
 class MultiThreadDownloader:
-    def __init__(self, session_func, used_proxy, filesize, thread_number):
+    def __init__(self, progress_bar, session_func, used_proxy, filesize, thread_number):
+        self.progress = progress_bar
         self.session_func = session_func
         self.used_proxy = used_proxy
         self.thread_number = thread_number
@@ -22,21 +25,27 @@ class MultiThreadDownloader:
         offset = int(self.filesize / self.thread_number)
         for i in range(self.thread_number):
             if i == self.thread_number - 1:
-                self.ranges.append((str(i * offset), ''))
+                self.ranges.append((str(i * offset), str(int(self.filesize-1))))
             else:
                 self.ranges.append((str(i * offset), str((i+1) * offset - 1)))
     
-    def get(self, url, filename):
-        thread_list = []
-        for proc_id, each_range in enumerate(self.ranges):
-            start, end = each_range
-            thread = threading.Thread(target=download_session, args=(self.session_func, url, filename, proc_id, start, end, self.used_proxy))
-            thread.start()
-            thread_list.append(thread)
+    def get(self, url, filename, force_back_google):
+        with self.progress:
+            with ThreadPoolExecutor(max_workers=len(self.ranges)) as pool:
+                ts = []
+                status = []
+                for proc_id, each_range in enumerate(self.ranges):
+                    start, end = each_range
+                    task_id = self.progress.add_task("download", filename=filename, proc_id=proc_id, start=False)
+                    t = pool.submit(download_session, self.session_func, url, filename, proc_id, start, end, self.used_proxy, self.progress, force_back_google)
+                    ts.append(t)
+                for t in as_completed(ts):
+                    interrupted = t.result()
+                    status.append(interrupted)
+        if True in status:
+            return True
+        return False
 
-        for i in thread_list:
-            i.join()
-    
     def concatenate(self, filename):
         sub_filenames = []
         dirname = os.path.dirname(filename)
