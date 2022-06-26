@@ -128,6 +128,8 @@ class DriveSession:
         self.set_range(start, end)
       cur_state = start + ori_filesize
       for chunk in self.response.iter_content(self.chunk_size):
+        if cur_state >= end + 1:
+          break
         self.file_handler.write(chunk)
         chunk_num = len(chunk)
         progress_bar.update(proc_id, advance=chunk_num)
@@ -135,9 +137,7 @@ class DriveSession:
         if done_event.is_set():
           interrupted = True
           return interrupted
-        if cur_state >= end + 1:
-          break
-
+          
   def connect(self, url, custom_filename=''):
     self.base_url = url
     self.response = self.session.get(url, params=self.params, proxies=self.proxies, stream=True)
