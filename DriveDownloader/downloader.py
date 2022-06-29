@@ -48,6 +48,10 @@ multi_progress = Progress(
     TimeRemainingColumn(),
     refresh_per_second=10
 )
+url_scheme_env_key_map = {
+        "http": "http_proxy",
+        "https": "https_proxy",
+}
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Drive Downloader Args')
@@ -59,22 +63,19 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+def get_env(key):
+    value = os.environ.get(key)
+    if not value or len(value) == 0:
+        return None
+    return value;
+
 def download_single_file(url, filename="", thread_number=1, force_back_google=False, list_suffix=None):
     scheme = judge_scheme(url)
-    if scheme == 'http':
-        if len(os.environ["http_proxy"]) > 0:
-            proxy = os.environ["http_proxy"]
-        else:
-            proxy = None
-    elif scheme == 'https':
-        if len(os.environ["https_proxy"]) > 0:
-            proxy = os.environ["https_proxy"]
-        else:
-            proxy = None
-    else:
+    if scheme not in url_scheme_env_key_map.keys():
         raise NotImplementedError(f"Unsupported scheme {scheme}")
-    used_proxy = proxy
-    
+    env_key = url_scheme_env_key_map[scheme]
+    used_proxy = get_env(env_key)
+
     session_name = judge_session(url)
     session_func = get_session(session_name)
     google_fix_logic = False
@@ -93,7 +94,7 @@ def download_single_file(url, filename="", thread_number=1, force_back_google=Fa
         download_session = MultiThreadDownloader(progress_applied, session_func, used_proxy, download_session.filesize, thread_number)
         interrupted = download_session.get(url, final_filename, force_back_google)
         if interrupted:
-            return 
+            return
         download_session.concatenate(final_filename)
     else:
         with progress_applied:
