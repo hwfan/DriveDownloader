@@ -108,8 +108,10 @@ def download_filelist(args):
     lines = [line for line in open(args.url, 'r')]
     for line_idx, line in enumerate(lines):
         splitted_line = line.strip().split(" ")
+        url, filename = splitted_line[0], splitted_line[1] if len(splitted_line) > 1 else ""
+        thread_number = int(splitted_line[2]) if len(splitted_line) > 2 else 1
         list_suffix = "({:d}/{:d})".format(line_idx+1, len(lines))
-        download_single_file(*splitted_line, args.thread_number, list_suffix)
+        download_single_file(url, filename, thread_number, args.force_back_google, list_suffix)
 
 def simple_cli():
     console.print(f"***********************************************************************")
