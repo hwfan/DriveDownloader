@@ -118,6 +118,7 @@ Some code of DriveDownloader is borrowed from [PyDrive2](https://github.com/iter
  - [x] Downloading files from a list.
  - [x] Multi-thread downloading.
  - [x] Resume downloading.
+ - [ ] Folder downloading.
  - [ ] Window-based UI.
  - [ ] Quick Start.
 
