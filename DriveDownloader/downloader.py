@@ -24,30 +24,6 @@ MINOR_VERSION = 6
 POST_VERSION = 0
 __version__ = f"{MAJOR_VERSION}.{MINOR_VERSION}.{POST_VERSION}"
 console = Console(width=72)
-single_progress = Progress(
-    TextColumn("[bold blue]Downloading: ", justify="left"),
-    BarColumn(bar_width=15),
-    "[progress.percentage]{task.percentage:>3.1f}%",
-    "|",
-    DownloadColumn(),
-    "|",
-    TransferSpeedColumn(),
-    "|",
-    TimeRemainingColumn(),
-    refresh_per_second=10
-)
-multi_progress = Progress(
-    TextColumn("[bold blue]Thread {task.fields[proc_id]}: ", justify="left"),
-    BarColumn(bar_width=15),
-    "[progress.percentage]{task.percentage:>3.1f}%",
-    "|",
-    DownloadColumn(),
-    "|",
-    TransferSpeedColumn(),
-    "|",
-    TimeRemainingColumn(),
-    refresh_per_second=10
-)
 url_scheme_env_key_map = {
         "http": "http_proxy",
         "https": "https_proxy",
@@ -82,6 +58,30 @@ def download_single_file(url, filename="", thread_number=1, force_back_google=Fa
     if session_name == 'GoogleDrive' and thread_number > 1 and not force_back_google:
         thread_number = 1
         google_fix_logic = True
+    single_progress = Progress(
+        TextColumn("[bold blue]Downloading: ", justify="left"),
+        BarColumn(bar_width=15),
+        "[progress.percentage]{task.percentage:>3.1f}%",
+        "|",
+        DownloadColumn(),
+        "|",
+        TransferSpeedColumn(),
+        "|",
+        TimeRemainingColumn(),
+        refresh_per_second=10
+    )
+    multi_progress = Progress(
+        TextColumn("[bold blue]Thread {task.fields[proc_id]}: ", justify="left"),
+        BarColumn(bar_width=15),
+        "[progress.percentage]{task.percentage:>3.1f}%",
+        "|",
+        DownloadColumn(),
+        "|",
+        TransferSpeedColumn(),
+        "|",
+        TimeRemainingColumn(),
+        refresh_per_second=10
+    )
     progress_applied = multi_progress if thread_number > 1 else single_progress
     download_session = session_func(used_proxy)
     download_session.connect(url, filename, force_backup=force_back_google if session_name == 'GoogleDrive' else False)
